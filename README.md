@@ -1,110 +1,91 @@
 # welcome to my website by habib
-import math
+<!DOCTYPE html><html>
+<head>
+  <title>Kalkulator Matematik Sekolah Menengah</title>
+  <style>
+    body { font-family: Arial; margin: 40px; }
+    input, select, button { margin: 5px 0; display: block; }
+    .section { margin-bottom: 30px; }
+  </style>
+</head>
+<body>
+  <h1>Kalkulator Matematik Tingkatan 1 - 5</h1>  <form id="mathForm">
+    <div class="section">
+      <label for="topik">Pilih Topik:</label>
+      <select id="topik">
+        <option value="nisbah">Nombor Nisbah</option>
+        <option value="faktor_gandaan">Faktor & Gandaan</option>
+        <option value="kuasa">Kuasa dan Punca</option>
+        <option value="nisbah_kadar">Nisbah, Kadar & Kadaran</option>
+        <option value="algebra">Ungkapan Algebra</option>
+        <option value="linear">Persamaan Linear</option>
+        <option value="ketaksamaan">Ketaksamaan Linear</option>
+        <option value="sudut">Garis & Sudut</option>
+        <option value="poligon">Poligon Asas</option>
+        <option value="luas">Perimeter & Luas</option>
+        <option value="set">Pengenalan Set</option>
+        <option value="data">Pengendalian Data</option>
+        <option value="pythagoras">Teorem Pythagoras</option>
+      </select>
+    </div><div class="section">
+  <label for="input1">Input 1:</label>
+  <input type="number" id="input1">
 
-# 1. Nombor nisbah
-def nombor_nisbah(a, b):
-    return a / b
-    
-# 2. Faktor dan gandaan
-def faktor(n):
-    return [i for i in range(1, n+1) if n % i == 0]
+  <label for="input2">Input 2:</label>
+  <input type="number" id="input2">
 
-def gandaan(n, jumlah=5):
-    return [n * i for i in range(1, jumlah+1)]
+  <label for="input3">(Jika perlu) Input 3:</label>
+  <input type="number" id="input3">
+</div>
 
-# 3. Kuasa dan punca
-def kuasa_dua(n):
-    return n ** 2
+<button type="button" onclick="kira()">Kira</button>
 
-def punca_kuasa_dua(n):
-    return math.sqrt(n)
-
-def kuasa_tiga(n):
-    return n ** 3
-
-def punca_kuasa_tiga(n):
-    return n ** (1/3)
-
-# 4. Nisbah, kadar dan kadaran
-def nisbah(a, b):
-    gcd = math.gcd(a, b)
-    return f"{a//gcd}:{b//gcd}"
-
-def kadar(jarak, masa):
-    if masa == 0:
-        return "Masa tak boleh sifar"
-    return jarak / masa
-
-def kadaran(a, b, x):
-    # a : b = x : ?
-    return (b * x) / a
-
-# 5. Ungkapan algebra (Contoh: 2x + 3, bila x = 4)
-def ungkapan_algebra(a, b, x):
-    return a * x + b
-
-# 6. Persamaan linear (ax + b = c)
-def persamaan_linear(a, b, c):
-    if a == 0:
-        return "Tiada penyelesaian"
-    return (c - b) / a
-
-# 7. Ketaksamaan linear (ax + b < c)
-def ketaksamaan_linear(a, b, c):
-    x = (c - b) / a
-    if a > 0:
-        return f"x < {x}"
-    else:
-        return f"x > {x}"
-
-# 8. Garis dan sudut
-def sudut_tepat():
-    return 90
-
-def sudut_lurus():
-    return 180
-
-# 9. Poligon asas
-def bil_sudut_poligon(sisi):
-    return (sisi - 2) * 180
-
-# 10. Perimeter dan luas
-def perimeter_segiempat(panjang, lebar):
-    return 2 * (panjang + lebar)
-
-def luas_segiempat(panjang, lebar):
-    return panjang * lebar
-
-# 11. Set
-def set_bersilang(set1, set2):
-    return list(set(set1) & set(set2))
-
-def set_gabungan(set1, set2):
-    return list(set(set1) | set(set2))
-
-# 12. Pengendalian data (min)
-def min_data(data):
-    return sum(data) / len(data)
-
-def median_data(data):
-    data = sorted(data)
-    n = len(data)
-    if n % 2 == 1:
-        return data[n//2]
-    else:
-        return (data[n//2 - 1] + data[n//2]) / 2
-
-def mod_data(data):
-    return max(set(data), key=data.count)
-
-# 13. Teorem Pythagoras
-def pythagoras(a, b):
-    return math.sqrt(a**2 + b**2)
-
-# Contoh penggunaan
-print("Kuasa Dua bagi 5:", kuasa_dua(5))
-print("Punca Kuasa Tiga bagi 27:", punca_kuasa_tiga(27))
-print("Nisbah 6 dan 9:", nisbah(6, 9))
-print("Faktor 12:", faktor(12))
-print("Sudut dalam segitiga:", bil_sudut_poligon(3))
-print("Panjang hipotenus bila sisi 3 dan 4:", pythagoras(3, 4))
+  </form>  <div id="hasil"></div>  <script>
+    function kira() {
+      const topik = document.getElementById('topik').value;
+      const a = parseFloat(document.getElementById('input1').value);
+      const b = parseFloat(document.getElementById('input2').value);
+      const c = parseFloat(document.getElementById('input3').value);
+      let hasil = "";
+      switch(topik) {
+        case "nisbah": hasil = a / b; break;
+        case "faktor_gandaan": hasil = `Faktor: ${faktor(a)} | Gandaan: ${gandaan(a)}`; break;
+        case "kuasa": hasil = `Kuasa 2: ${a**2}, Punca 2: ${Math.sqrt(a)}, Kuasa 3: ${a**3}, Punca 3: ${Math.cbrt(a)}`; break;
+        case "nisbah_kadar": hasil = `Nisbah: ${nisbah(a, b)}, Kadar: ${(b!==0)?(a/b):"Tak sah"}`; break;
+        case "algebra": hasil = `${a}x + ${b}, x = ${c}, Hasil: ${a*c + b}`; break;
+        case "linear": hasil = `x = ${(c - b) / a}`; break;
+        case "ketaksamaan": hasil = (a > 0) ? `x < ${(c - b) / a}` : `x > ${(c - b) / a}`; break;
+        case "sudut": hasil = `Sudut Tepat = 90°, Sudut Lurus = 180°`; break;
+        case "poligon": hasil = `Jumlah sudut = ${(a - 2) * 180}°`; break;
+        case "luas": hasil = `Perimeter: ${2*(a+b)}, Luas: ${a*b}`; break;
+        case "set": hasil = `Gabungan: {[...new Set([a,b,c])].join(", ")}`; break;
+        case "data": hasil = `Min: ${(a+b+c)/3}, Median: ${[a,b,c].sort()[1]}`; break;
+        case "pythagoras": hasil = `Hipotenus: ${Math.sqrt(a*a + b*b)}`; break;
+        default: hasil = "Sila pilih topik";
+      }
+      document.getElementById("hasil").innerHTML = `<h3>Jawapan:</h3><p>${hasil}</p>`;
+    }
+    function faktor(n) {
+      let f = [];
+      for(let i=1; i<=n; i++) {
+        if(n % i === 0) f.push(i);
+      }
+      return f.join(", ");
+    }
+    function gandaan(n) {
+      let g = [];
+      for(let i=1; i<=5; i++) {
+        g.push(n*i);
+      }
+      return g.join(", ");
+    }
+    function nisbah(a, b) {
+      function gcd(x, y) {
+        while(y) [x, y] = [y, x % y];
+        return x;
+      }
+      const d = gcd(a,b);
+      return `${a/d}:${b/d}`;
+    }
+  </script></body>
+</html>
